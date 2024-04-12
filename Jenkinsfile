@@ -18,7 +18,7 @@ pipeline{
 
        stage ("Sonar Analysis") {
             environment {
-               scannerHome = tool 'sonar-scanner'
+               scannerHome = tool 'valaxy-sonar-scanner'
             }
             steps {
                 

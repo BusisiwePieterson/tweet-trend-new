@@ -23,7 +23,7 @@ pipeline{
             steps {
                 
                 withSonarQubeEnv('valaxy-sonarqube-server') {    
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${scannerHome}/bin/valaxy-sonar-scanner"
                 
                 }    
                

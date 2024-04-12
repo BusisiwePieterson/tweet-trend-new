@@ -1,18 +1,36 @@
-pipeline {
+pipeline{
     agent {
         node {
-            label 'maven'
+            label "maven"
         }
     }
     environment {
-        PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
+         PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
     }
     stages {
-        stage("Build") {
-            steps {
+        stage('build') {
+            steps{
+                
                 sh 'mvn clean deploy'
+               
+        }
+      }
+
+       stage ("Sonar Analysis") {
+            environment {
+               scannerHome = tool 'valaxy-sonar-scanner'
             }
+            steps {
+                
+                withSonarQubeEnv('valaxy-sonarqube-server') {    
+                    sh "${scannerHome}/bin/sonar-scanner"
+                
+                }    
+               
+            }   
         }
        
+
+      
     }
-}
+    }
